@@ -39,15 +39,12 @@ The requirements listed below are **absolute minimums**. Ensure that your websit
 
 * Have at least **three pages**.  
   * Keep the grid system consistent between pages as much as possible.  
-* Use at least **ten different HTML tags**.  
-* Include at least **one table**.  
+* Use at least **ten different HTML tags**.    
 * Include at least **two forms**.  
 * Include at least **one dropdown menu**.  
-* Include at least **one of each** of the following forms of content:   
-  * Text.  
+* Include at least **one of each** of the following forms of content:    
   * Images.  
   * GIFs.  
-  * (See resource links above for some free content of each of these types.)
 
 **CSS Requirements**
 

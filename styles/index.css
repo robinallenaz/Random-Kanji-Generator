@@ -1,0 +1,31 @@
+
+* {
+  text-align: center;
+}
+
+h1 {
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+h2 {
+  font-size: 60px;
+  filter: drop-shadow(5px 5px 10px #8f9392);
+  margin-bottom: 20px;
+}
+.animated_object {
+  animation: myAnim 0.2s ease 0s 1 normal forwards;
+}
+/* Animation for h2 */
+@keyframes myAnim {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}

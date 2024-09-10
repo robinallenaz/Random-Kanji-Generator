@@ -19,10 +19,10 @@ h1 {
 h2 {
   font-size: 60px;
   filter: drop-shadow(5px 5px 10px #8f9392);
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .animated_object {
-  animation: myAnim 0.2s ease 0s 1 normal forwards;
+  animation: myAnim 0.2s ease-out 0s 1 normal forwards;
 }
 /* Animation of kanji */
 @keyframes myAnim {

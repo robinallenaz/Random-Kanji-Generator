@@ -1,3 +1,10 @@
+/* Disable horizontal scrollbar */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 label {
   font-size: large;
 }
@@ -17,7 +24,7 @@ h2 {
 .animated_object {
   animation: myAnim 0.2s ease 0s 1 normal forwards;
 }
-/* Animation for h2 */
+/* Animation of kanji */
 @keyframes myAnim {
   0% {
     transform: scale(1);

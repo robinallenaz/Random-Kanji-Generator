@@ -12,6 +12,10 @@ body {
   overflow-x: hidden;
 }
 
+p {
+  color: black;
+}
+
 label {
   font-size: large;
   color: black;

@@ -1,4 +1,11 @@
 /* Disable horizontal scrollbar */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 html,
 body {
   max-width: 100%;

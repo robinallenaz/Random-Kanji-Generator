@@ -7,6 +7,7 @@ body {
 
 label {
   font-size: large;
+  color: black;
 }
 * {
   text-align: center;
@@ -15,11 +16,13 @@ label {
 h1 {
   padding-top: 40px;
   padding-bottom: 30px;
+  color: black;
 }
 h2 {
   font-size: 60px;
   filter: drop-shadow(5px 5px 10px #8f9392);
   margin-bottom: 40px;
+  color: black;
 }
 .animated_object {
   animation: myAnim 0.2s ease-out 0s 1 normal forwards;
@@ -45,9 +48,50 @@ h2 {
   font-style: normal;
 }
 
-/*Targeting image*/
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+  color: white;
+}
 
-body > div:nth-child(4) > img {
-  width: 500px;
-  margin-top: 30px;
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+.flip-card-front {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #e2e2e2;
+}
+
+.flip-card-back {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+  background-color: #e2e2e2;
+  transform: rotateY(180deg);
 }

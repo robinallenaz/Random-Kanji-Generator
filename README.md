@@ -6,7 +6,9 @@
 
 - **Random Kanji Generator**
 
-## Getting Started
+## Planned Features
+
+A dropdown will be added that allows the user to dynamically switch between sets of N1-N5 Kanji.
 
 ### Prerequisites
 

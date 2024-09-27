@@ -19,12 +19,9 @@
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="styles/index.css" />
     <!--Linking font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
   </head>
   <body>
     <!-- Navbar documentation: https://getbootstrap.com/docs/4.1/components/navbar/ -->
@@ -65,40 +62,31 @@
             <label id="Kunyomi"></label>
           </div>
         </div>
+        </div>
       </div>
-    </div>
-    <br />
-    <button class="btn btn-primary" id="generateButton" type="button">
-      New Kanji
-    </button>
+      <br>
+      <button class="btn btn-primary" id="generateButton" type="button">
+        New Kanji
+      </button>
     <footer>
-      <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-      <script>
-        kofiWidgetOverlay.draw("robinallen", {
-          type: "floating-chat",
-          "floating-chat.donateButton.text": "Support me",
-          "floating-chat.donateButton.background-color": "#00b9fe",
-          "floating-chat.donateButton.text-color": "#fff",
-        });
-      </script>
+      <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+  kofiWidgetOverlay.draw('robinallen', {
+    'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Support me',
+    'floating-chat.donateButton.background-color': '#00b9fe',
+    'floating-chat.donateButton.text-color': '#fff'
+  });
+</script> 
     </footer>
     <script>
-      //Adding event listener to select with id "dropdown"
-      document
-        .querySelector("#dropdown")
-        .addEventListener("click", handleClick);
-
-      function handleClick() {
-        
-      }
-
-      let data = [];
+      var data = [];
       //Loads kanji and updates the display
       async function fetchKanji() {
         try {
           //Loads data from file
           const response = await fetch("./scripts/n5_kanji.json");
-          //Throwing error
+         //Throwing error
           if (!response.ok) {
             throw new Error("Network response was not okay");
           }

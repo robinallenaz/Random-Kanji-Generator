@@ -728,21 +728,14 @@ h2 {
 .feature-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .feature-list li {
   margin: 0.5rem 0;
-  padding-left: 1.5rem;
-  position: relative;
   color: #e6e6fa;
   font-weight: 300;
-}
-
-.feature-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #ff89ed;
+  line-height: 1.6;
 }
 
 /* Responsive adjustments */

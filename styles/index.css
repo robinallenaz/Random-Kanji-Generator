@@ -28,9 +28,16 @@ label {
 }
 
 h1 {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  color: #ffd6e0;  /* Soft pink */
+  color: #ffd6e0;
+  text-shadow: 
+      0 0 10px rgba(255, 137, 237, 0.8),
+      0 0 20px rgba(255, 137, 237, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
 h2 {
@@ -61,43 +68,60 @@ h2 {
   transform: rotateY(180deg);
 }
 
-.flip-card-front,
-.flip-card-back {
-  box-shadow: 0 8px 14px 0 rgba(255, 182, 193, 0.3);  /* Light pink shadow */
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: 1rem;
-  background: #ffffff;  /* White background */
-  border: 1px solid rgba(255, 182, 193, 0.2);  /* Subtle pink border */
-  color: #1a0f1f;  /* Dark purple text for contrast */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1.5rem;
+    
+    background: rgba(255, 137, 237, 0.5);
+    backdrop-filter: blur(12px) saturate(0%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 2px 2px rgba(255, 255, 255, 0.25);
 }
 
-.flip-card-front {
-  box-shadow: 
-      rgba(255, 182, 193, 0.3) 0px 2px 4px,
-      rgba(255, 182, 193, 0.2) 0px 7px 13px -3px,
-      rgba(255, 182, 193, 0.1) 0px -1px 0px inset;
+.flip-card-back {
+    transform: rotateY(180deg);
 }
 
-.flip-card-back {
-  box-shadow: 
-      rgba(255, 182, 193, 0.3) 0px 2px 4px,
-      rgba(255, 182, 193, 0.2) 0px 7px 13px -3px,
-      rgba(255, 182, 193, 0.1) 0px -1px 0px inset;
-  transform: rotateY(180deg);
+.flip-card-front:hover {
+    background: rgba(255, 137, 237, 0.9);
+    border-color: white;
+    box-shadow: 
+        0 6px 8px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        inset 0 2px 2px rgba(255, 255, 255, 0.2);
+}
+
+.flip-card-front *, .flip-card-back * {
+    color: #ffd6e0 !important;
+    opacity: 1 !important;
 }
 
 .flip-card-front h2,
-.flip-card-back h2,
+.flip-card-back h2 {
+  font-size: 6rem;
+  margin: 0;
+  font-weight: bold;
+}
+
 .flip-card-front p,
 .flip-card-back p {
-  color: #1a0f1f;  /* Dark purple text */
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-weight: 500;
 }
 
 .animated_object {
@@ -209,20 +233,41 @@ h2 {
   }
 }
 
-/* Update button styles to match theme */
+/* Button with glassmorphism */
 .btn-primary {
-  background-color: #2b1f2f;  /* Deep purple */
-  border-color: rgba(255, 182, 193, 0.3);  /* Light pink border */
-  color: #ffd6e0;  /* Soft pink */
+  background: rgba(255, 137, 237, 0.5);
+  backdrop-filter: blur(12px) saturate(0%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffd6e0;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+  cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:hover {
-  background-color: #231526;  /* Dark mauve */
-  border-color: rgba(255, 182, 193, 0.5);  /* Slightly more visible pink border */
-  color: #ffb7c5;  /* Light pink */
+  background: rgba(255, 137, 237, 0.9);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+  box-shadow: 
+      0 6px 8px rgba(0, 0, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.12),
+      inset 0 2px 2px rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: white;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 * {

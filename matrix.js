@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const matrix = document.getElementById('matrix');
-    const characters = '桜花風月星雨雪空';
+    
+    // Mixed character set with kanji, hiragana, and katakana
+    const characters = [
+        // Kanji (reduced set)
+        '桜', '花', '風', '空',
+        // Hiragana
+        'あ', 'い', 'う', 'え', 'お',
+        'さ', 'き', 'く', 'け', 'こ',
+        // Katakana
+        'ア', 'イ', 'ウ', 'エ', 'オ',
+        'サ', 'シ', 'ス', 'セ', 'ソ'
+    ].join('');
     
     const colors = [
         '#ffd6e0', // soft pink
@@ -9,34 +20,50 @@ document.addEventListener('DOMContentLoaded', () => {
         '#dda0dd', // plum
     ];
 
+    function getRandomSize() {
+        // Create a distribution favoring smaller sizes but allowing for occasional large ones
+        const rand = Math.random();
+        if (rand < 0.6) { // 60% small
+            return Math.random() * 30 + 12; // 12-42px
+        } else if (rand < 0.85) { // 25% medium
+            return Math.random() * 50 + 42; // 42-92px
+        } else { // 15% large
+            return Math.random() * 208 + 92; // 92-300px
+        }
+    }
+
     function createCharacter(initialCreation = false) {
         const character = document.createElement('div');
         character.className = 'character';
         
-        // Distribute initial characters across the screen width and height
+        // Wider distribution across the screen
         if (initialCreation) {
-            character.style.left = `${(Math.random() * 80) + 10}vw`;
-            character.style.top = `${(Math.random() * 50)}vh`;
+            character.style.left = `${(Math.random() * 95)}vw`;
+            character.style.top = `${(Math.random() * 70)}vh`;
             character.style.animation = `
-                fall ${15 + Math.random() * 5}s linear infinite,
-                drift ${8 + Math.random() * 4}s ease-in-out infinite alternate,
-                spin ${12 + Math.random() * 4}s linear infinite
+                fall ${15 + Math.random() * 8}s linear infinite,
+                drift ${8 + Math.random() * 6}s ease-in-out infinite alternate,
+                spin ${12 + Math.random() * 6}s linear infinite
             `;
         } else {
-            character.style.left = `${(Math.random() * 80) + 10}vw`;
+            character.style.left = `${(Math.random() * 95)}vw`;
         }
         
-        // Wind drift effect with varied distances
-        const driftAmount = Math.random() * 100 + 50; // 50-150px drift
+        // More varied drift distances based on size
+        const size = getRandomSize();
+        const driftAmount = (Math.random() * 200 + 100) * (size / 50); // Larger characters drift more
         character.style.setProperty('--drift-left', `${-driftAmount}px`);
         character.style.setProperty('--drift-right', `${driftAmount}px`);
         
-        // Randomize sizes slightly
-        character.style.fontSize = `${Math.random() * 20 + 15}px`;
+        // Apply size and style
+        character.style.fontSize = `${size}px`;
         character.style.color = colors[Math.floor(Math.random() * colors.length)];
         character.textContent = characters[Math.floor(Math.random() * characters.length)];
         
-        // Cleanup
+        // Adjust opacity based on size
+        const opacity = size > 100 ? 0.3 : size > 50 ? 0.5 : 0.85;
+        character.style.opacity = opacity;
+        
         character.addEventListener('animationend', () => {
             character.remove();
         });
@@ -44,16 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
         matrix.appendChild(character);
     }
 
-    // Create initial set of characters with better distribution
-    for (let i = 0; i < 8; i++) {
-        setTimeout(() => createCharacter(true), i * 800);
+    // Initial characters (increased from 4 to 6)
+    for (let i = 0; i < 6; i++) {
+        setTimeout(() => createCharacter(true), i * 1000);
     }
 
-    // Continue creating characters at a varied rate
-    let nextSpawnTime = 1200;
+    // Faster spawn rate for new characters
+    let nextSpawnTime = 1500;
     function spawnCharacter() {
         createCharacter(false);
-        nextSpawnTime = 1000 + Math.random() * 500;
+        nextSpawnTime = 1200 + Math.random() * 800; // 1.2-2 seconds between spawns
         setTimeout(spawnCharacter, nextSpawnTime);
     }
     

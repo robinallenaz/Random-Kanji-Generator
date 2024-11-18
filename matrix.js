@@ -21,29 +21,47 @@ document.addEventListener('DOMContentLoaded', () => {
         '#dda0dd', // plum
     ];
 
+    // Track active characters
+    const activeCharacters = new Set();
+
+    function removeCharacter(character) {
+        character.remove();
+        activeCharacters.delete(character);
+    }
+
     function createCharacter(initialCreation = false) {
+        // Don't create if we already have max characters
+        if (activeCharacters.size >= 8) return;
+
         const character = document.createElement('div');
         character.className = 'character';
         
-        // Wider distribution across the screen
+        // Set initial position
         if (initialCreation) {
             character.style.left = `${(Math.random() * 98)}vw`;
             character.style.top = `${(Math.random() * 90)}vh`;
-            character.style.animation = `
-                fall ${20 + Math.random() * 10}s linear infinite,
-                drift ${10 + Math.random() * 8}s ease-in-out infinite alternate,
-                spin ${15 + Math.random() * 8}s linear infinite
-            `;
         } else {
             character.style.left = `${(Math.random() * 98)}vw`;
+            character.style.top = '-5%';
         }
+        
+        // Set animation durations
+        const fallDuration = 20 + Math.random() * 10;
+        const driftDuration = 10 + Math.random() * 8;
+        const spinDuration = 15 + Math.random() * 8;
+        
+        character.style.animation = `
+            fall ${fallDuration}s linear forwards,
+            drift ${driftDuration}s ease-in-out infinite alternate,
+            spin ${spinDuration}s linear infinite
+        `;
         
         // More varied drift distances
         const driftAmount = Math.random() * 300 + 100; // 100-400px drift
         character.style.setProperty('--drift-left', `${-driftAmount}px`);
         character.style.setProperty('--drift-right', `${driftAmount}px`);
         
-        // More varied sizes
+        // Set size and style
         character.style.fontSize = `${Math.random() * 25 + 12}px`; // 12-37px
         character.style.color = colors[Math.floor(Math.random() * colors.length)];
         
@@ -58,11 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         character.textContent = selectedChar;
         
-        character.addEventListener('animationend', () => {
-            character.remove();
+        // Clean up character when animation ends
+        character.addEventListener('animationend', (e) => {
+            if (e.animationName === 'fall') {
+                removeCharacter(character);
+            }
         });
-        
+
+        // Add to tracking set and DOM
+        activeCharacters.add(character);
         matrix.appendChild(character);
+
+        // Backup cleanup after max duration
+        setTimeout(() => {
+            if (activeCharacters.has(character)) {
+                removeCharacter(character);
+            }
+        }, fallDuration * 1000 + 1000); // Add 1 second buffer
     }
 
     // Initial characters
@@ -70,14 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => createCharacter(true), i * 1500);
     }
 
-    // Controlled spawn rate
-    let nextSpawnTime = 2500;
-    function spawnCharacter() {
-        const currentCharacters = document.getElementsByClassName('character').length;
-        if (currentCharacters < 8) {
-            createCharacter(false);
+    // Periodic cleanup check (every 30 seconds)
+    setInterval(() => {
+        if (activeCharacters.size > 8) {
+            const oldestCharacters = Array.from(activeCharacters).slice(0, activeCharacters.size - 8);
+            oldestCharacters.forEach(removeCharacter);
         }
-        nextSpawnTime = 2500 + Math.random() * 1500; // 2.5-4 seconds between spawns
+    }, 30000);
+
+    // Controlled spawn rate
+    function spawnCharacter() {
+        createCharacter(false);
+        const nextSpawnTime = 2500 + Math.random() * 1500; // 2.5-4 seconds between spawns
         setTimeout(spawnCharacter, nextSpawnTime);
     }
     

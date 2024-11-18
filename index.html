@@ -3,99 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+    <title>Random Kanji Generator</title>
+    <meta name="description" content="Learn Japanese kanji characters with this interactive flashcard generator" />
     <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="styles/index.css" />
-    <!--Linking font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
-    <!-- Navbar documentation: https://getbootstrap.com/docs/4.1/components/navbar/ -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <h1 class="navbar-brand">Gengo Gateway</h1>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </nav>
-      <!--Displays random kanji-->
-      <h1>Random Kanji Generator</h1>
-      <!-- <select>
-        <option>
-          N5 Kanji (default)
-        </option>
-        <option>N4 Kanji</option>
-      </select> -->
-      <div class="container">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h2 id="name"></h2>
-            <p>Hover to see the definition, Onyomi, and Kunyomi!</p>
-          </div>
-          <div class="flip-card-back">
-            <label id="definition"></label>
-            <br />
-            <label id="Onyomi"></label>
-            <br />
-            <label id="Kunyomi"></label>
-          </div>
-        </div>
+    <nav class="nav-container">
+      <div class="nav-content">
+        <h1 class="nav-title">Gengo Gateway</h1>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="about.html" class="nav-link">About</a>
         </div>
       </div>
-      <br>
-      <button class="btn btn-primary" id="generateButton" type="button">
-        New Kanji
-      </button>
+    </nav>
+
+    <!--Matrix background of falling characters-->
+    <div class="matrix-background" id="matrix"></div>
+
+    <main role="main">
+      <!--Displays random kanji-->
+      <h1>Random Kanji Generator</h1>
+      <div class="container">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h2 id="name"></h2>
+              <p>Hover to see the definition, Onyomi, and Kunyomi!</p>
+            </div>
+            <div class="flip-card-back">
+              <label id="definition"></label>
+              <br />
+              <label id="Onyomi"></label>
+              <br />
+              <label id="Kunyomi"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary" id="generateButton" type="button">
+          New Kanji
+        </button>
+      </div>
+    </main>
+
     <footer>
       <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-  kofiWidgetOverlay.draw('robinallen', {
-    'type': 'floating-chat',
-    'floating-chat.donateButton.text': 'Support me',
-    'floating-chat.donateButton.background-color': '#00b9fe',
-    'floating-chat.donateButton.text-color': '#fff'
-  });
-</script> 
+      <script>
+        kofiWidgetOverlay.draw('robinallen', {
+          'type': 'floating-chat',
+          'floating-chat.donateButton.text': 'Support me',
+          'floating-chat.donateButton.background-color': '#00b9fe',
+          'floating-chat.donateButton.text-color': '#fff'
+        });
+      </script> 
     </footer>
+
     <script>
       var data = [];
       //Loads kanji and updates the display
       async function fetchKanji() {
         try {
-          //Loads data from file
-          const response = await fetch("./scripts/n5_kanji.json");
-         //Throwing error
-          if (!response.ok) {
-            throw new Error("Network response was not okay");
-          }
+          const response = await fetch('./scripts/n5_kanji.json');
           data = await response.json();
+          // Display initial kanji
           getRandomKanji();
         } catch (error) {
-          console.error("Error fetching the JSON file:", error);
+          console.error('Error loading kanji:', error);
         }
       }
+
       //Updates the display with a random kanji
       function getRandomKanji() {
         const randomKanji = data[Math.floor(Math.random() * data.length)];
@@ -111,9 +93,11 @@
 
       // Call the function to fetch kanji
       fetchKanji();
-      generateButton.addEventListener("click", () => {
+      document.getElementById("generateButton").addEventListener("click", () => {
         getRandomKanji();
       });
     </script>
+    <!--Matrix script-->
+    <script src="matrix.js"></script>
   </body>
 </html>

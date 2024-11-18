@@ -1,61 +1,43 @@
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-html,
 body {
-  max-width: 100%;
-  overflow-x: hidden;
+  background: linear-gradient(
+      135deg,
+      #1a0f1f 0%,    /* Dark purple */
+      #231526 25%,   /* Dark mauve */
+      #1f1a24 50%,   /* Dark purple-gray */
+      #2b1f2f 75%,   /* Deep purple */
+      #1a0f1f 100%   /* Dark purple */
+  );
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 p {
-  color: black;
+  color: #e6e6fa;  /* Light lavender */
 }
 
 label {
   font-size: large;
-  color: black;
-}
-* {
-  text-align: center;
+  color: #e6e6fa;  /* Light lavender */
 }
 
 h1 {
   padding-top: 0px;
   padding-bottom: 0px;
-  color: black;
+  color: #ffd6e0;  /* Soft pink */
 }
+
 h2 {
   font-size: 60px;
-  filter: drop-shadow(5px 5px 10px #8f9392);
+  filter: drop-shadow(5px 5px 10px rgba(255, 182, 193, 0.3));  /* Light pink shadow */
   margin-bottom: 40px;
-  color: black;
-}
-.animated_object {
-  animation: myAnim 0.2s ease-out 0s 1 normal forwards;
-}
-/* Animation of kanji */
-@keyframes myAnim {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1.2);
-  }
-}
-
-.zen-kurenaido-regular {
-  font-family: "Zen Kurenaido", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  color: #ffd6e0;  /* Soft pink */
 }
 
 .flip-card {
@@ -81,7 +63,7 @@ h2 {
 
 .flip-card-front,
 .flip-card-back {
-  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 14px 0 rgba(255, 182, 193, 0.3);  /* Light pink shadow */
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -91,19 +73,56 @@ h2 {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 1rem;
+  background: #ffffff;  /* White background */
+  border: 1px solid rgba(255, 182, 193, 0.2);  /* Subtle pink border */
+  color: #1a0f1f;  /* Dark purple text for contrast */
 }
 
 .flip-card-front {
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-  background-color: #e2e2e2;
+  box-shadow: 
+      rgba(255, 182, 193, 0.3) 0px 2px 4px,
+      rgba(255, 182, 193, 0.2) 0px 7px 13px -3px,
+      rgba(255, 182, 193, 0.1) 0px -1px 0px inset;
 }
 
 .flip-card-back {
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-  background-color: #e2e2e2;
+  box-shadow: 
+      rgba(255, 182, 193, 0.3) 0px 2px 4px,
+      rgba(255, 182, 193, 0.2) 0px 7px 13px -3px,
+      rgba(255, 182, 193, 0.1) 0px -1px 0px inset;
   transform: rotateY(180deg);
+}
+
+.flip-card-front h2,
+.flip-card-back h2,
+.flip-card-front p,
+.flip-card-back p {
+  color: #1a0f1f;  /* Dark purple text */
+}
+
+.animated_object {
+  animation: myAnim 0.2s ease-out 0s 1 normal forwards;
+}
+
+/* Animation of kanji */
+@keyframes myAnim {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+.zen-kurenaido-regular {
+  font-family: "Zen Kurenaido", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .matrix-background body {
@@ -146,6 +165,25 @@ h2 {
   mix-blend-mode: screen;
   will-change: transform;
   transform-origin: center center;
+  animation: 
+      fall 15s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+      drift 8s ease-in-out infinite alternate,
+      spin 12s linear infinite;
+}
+
+@keyframes drift {
+  0% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(var(--drift-left, -100px));
+  }
+  75% {
+      transform: translateX(var(--drift-right, 100px));
+  }
+  100% {
+      transform: translateX(0);
+  }
 }
 
 @keyframes spin {
@@ -160,22 +198,36 @@ h2 {
 @keyframes fall {
   0% {
       top: -5%;
-      transform: translateX(0);
       opacity: 0;
   }
-  5% {
+  10% {
       opacity: 0.85;
   }
-  95% {
+  90% {
       opacity: 0.85;
   }
   100% {
       top: 105%;
-      transform: translateX(var(--drift));
       opacity: 0;
   }
 }
 
-.character {
-  animation: fall linear infinite, spin linear infinite;
+/* Update button styles to match theme */
+.btn-primary {
+  background-color: #2b1f2f;  /* Deep purple */
+  border-color: rgba(255, 182, 193, 0.3);  /* Light pink border */
+  color: #ffd6e0;  /* Soft pink */
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #231526;  /* Dark mauve */
+  border-color: rgba(255, 182, 193, 0.5);  /* Slightly more visible pink border */
+  color: #ffb7c5;  /* Light pink */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+}
+
+* {
+  text-align: center;
 }

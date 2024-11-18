@@ -1,32 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const matrix = document.getElementById('matrix');
-    const characters = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    // Reduced character set for more subtle effect
+    const characters = '桜花風月星雨雪空';
     
-    // Enhanced sakura color palette
+    // Soft, sakura-inspired colors
     const colors = [
         '#ffd6e0', // soft pink
         '#ffb7c5', // light pink
         '#ff8fab', // medium pink
-        '#ff69b4', // bright pink
         '#dda0dd', // plum
-        '#e6e6fa'  // lavender
     ];
 
     function createCharacter() {
         const character = document.createElement('div');
         character.className = 'character';
         
-        // Position and movement
+        // Position
         character.style.left = `${Math.random() * 100}vw`;
-        const fallDuration = Math.random() * 8 + 4; // 4-12 seconds
-        character.style.animationDuration = `${fallDuration}s, ${fallDuration * 0.8}s`; // fall and spin durations
         
-        // Random horizontal drift
-        const drift = Math.random() * 200 - 100; // -100px to +100px
-        character.style.setProperty('--drift', `${drift}px`);
+        // Wind drift effect
+        const driftLeft = -(Math.random() * 150 + 50); // -50px to -200px
+        const driftRight = Math.random() * 150 + 50;   // 50px to 200px
+        character.style.setProperty('--drift-left', `${driftLeft}px`);
+        character.style.setProperty('--drift-right', `${driftRight}px`);
         
-        // Size and appearance
-        character.style.fontSize = `${Math.random() * 60 + 20}px`;
+        // Size and appearance (smaller size range for subtlety)
+        character.style.fontSize = `${Math.random() * 20 + 15}px`; // 15-35px
         character.style.color = colors[Math.floor(Math.random() * colors.length)];
         character.textContent = characters[Math.floor(Math.random() * characters.length)];
         
@@ -38,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         matrix.appendChild(character);
     }
 
-    // Create initial set of characters with staggered start
-    for (let i = 0; i < 30; i++) {
-        setTimeout(createCharacter, Math.random() * 3000);
+    // Create initial set of characters (reduced count)
+    for (let i = 0; i < 8; i++) {
+        setTimeout(createCharacter, Math.random() * 5000);
     }
 
-    // Continue creating characters
-    setInterval(createCharacter, 300); // Slightly slower creation rate
+    // Continue creating characters at a slower rate
+    setInterval(createCharacter, 1200); // Increased interval for fewer characters
 });

@@ -105,3 +105,77 @@ h2 {
   background-color: #e2e2e2;
   transform: rotateY(180deg);
 }
+
+.matrix-background body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+      135deg,
+      #2b1b2c 0%,
+      #1f1f35 25%,
+      #232a3d 50%,
+      #1f1f35 75%,
+      #2b1b2c 100%
+  );
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.matrix-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(
+      circle at center,
+      rgba(255, 182, 193, 0.05) 0%,
+      rgba(221, 160, 221, 0.05) 50%,
+      transparent 100%
+  );
+}
+
+.character {
+  position: absolute;
+  color: #FFC5C5;
+  font-family: "MS Gothic", monospace;
+  line-height: 1;
+  text-shadow: 0 0 12px currentColor;
+  opacity: 0.85;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes fall {
+  0% {
+      top: -5%;
+      transform: translateX(0);
+      opacity: 0;
+  }
+  5% {
+      opacity: 0.85;
+  }
+  95% {
+      opacity: 0.85;
+  }
+  100% {
+      top: 105%;
+      transform: translateX(var(--drift));
+      opacity: 0;
+  }
+}
+
+.character {
+  animation: fall linear infinite, spin linear infinite;
+}

@@ -166,23 +166,20 @@ h2 {
   will-change: transform;
   transform-origin: center center;
   animation: 
-      fall 15s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+      fall 15s linear infinite,             /* Changed to linear for constant speed */
       drift 8s ease-in-out infinite alternate,
       spin 12s linear infinite;
 }
 
 @keyframes drift {
   0% {
-      transform: translateX(0);
+      transform: translateX(var(--drift-left));
   }
-  25% {
-      transform: translateX(var(--drift-left, -100px));
-  }
-  75% {
-      transform: translateX(var(--drift-right, 100px));
+  50% {
+      transform: translateX(var(--drift-right));
   }
   100% {
-      transform: translateX(0);
+      transform: translateX(var(--drift-left));
   }
 }
 
@@ -200,10 +197,10 @@ h2 {
       top: -5%;
       opacity: 0;
   }
-  10% {
+  5% {
       opacity: 0.85;
   }
-  90% {
+  95% {
       opacity: 0.85;
   }
   100% {

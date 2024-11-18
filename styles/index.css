@@ -18,13 +18,15 @@ body {
   min-height: 100vh;
 }
 
-p {
-  color: #e6e6fa;  /* Light lavender */
+p, label {
+    color: #ffffff;  /* Pure white for better contrast */
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
 }
 
 label {
   font-size: large;
-  color: #e6e6fa;  /* Light lavender */
 }
 
 h1 {
@@ -35,16 +37,18 @@ h1 {
       0 2px 4px rgba(0, 0, 0, 0.3);
   font-size: 3.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   letter-spacing: 2px;
   text-align: center;
+  line-height: 1.5;
 }
 
 h2 {
   font-size: 60px;
   filter: drop-shadow(5px 5px 10px rgba(255, 182, 193, 0.3));  /* Light pink shadow */
-  margin-bottom: 40px;
+  margin-bottom: 1rem;
   color: #ffd6e0;  /* Soft pink */
+  line-height: 1.5;
 }
 
 .flip-card {
@@ -68,6 +72,11 @@ h2 {
   transform: rotateY(180deg);
 }
 
+.flip-card-inner:focus-within {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
 .flip-card-front, .flip-card-back {
     position: absolute;
     width: 100%;
@@ -76,10 +85,10 @@ h2 {
     backface-visibility: hidden;
     border-radius: 1.5rem;
     
-    background: rgba(255, 137, 237, 0.5);
-    backdrop-filter: blur(12px) saturate(0%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 137, 237, 0.35);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,41 +96,49 @@ h2 {
     gap: 10px;
     padding: 20px;
     box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        inset 0 2px 2px rgba(255, 255, 255, 0.25);
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.flip-card-front:hover {
+    background: rgba(255, 137, 237, 0.6);
+    border-color: white;
+    box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.25),
+        0 2px 8px rgba(0, 0, 0, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.flip-card-front *, .flip-card-back * {
+    color: #000000 !important;
+    opacity: 1 !important;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.flip-card-front h2 {
+    font-size: 6rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.flip-card-back p {
+    font-size: 1.3rem;
+    margin: 0.7rem 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .flip-card-back {
     transform: rotateY(180deg);
 }
 
-.flip-card-front:hover {
-    background: rgba(255, 137, 237, 0.9);
-    border-color: white;
-    box-shadow: 
-        0 6px 8px rgba(0, 0, 0, 0.15),
-        0 2px 4px rgba(0, 0, 0, 0.12),
-        inset 0 2px 2px rgba(255, 255, 255, 0.2);
-}
-
-.flip-card-front *, .flip-card-back * {
-    color: #ffd6e0 !important;
-    opacity: 1 !important;
-}
-
-.flip-card-front h2,
-.flip-card-back h2 {
-  font-size: 6rem;
-  margin: 0;
-  font-weight: bold;
-}
-
-.flip-card-front p,
-.flip-card-back p {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-  font-weight: 500;
+.flip-card:focus-visible,
+.btn-primary:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
 }
 
 .animated_object {
@@ -235,39 +252,44 @@ h2 {
 
 /* Button with glassmorphism */
 .btn-primary {
-  background: rgba(255, 137, 237, 0.5);
-  backdrop-filter: blur(12px) saturate(0%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffd6e0;
-  padding: 0.8rem 2rem;
+  background: rgba(255, 137, 237, 0.35);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #000000;
+  padding: 1rem 2.5rem;
   font-size: 1.1rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 
-      0 4px 6px rgba(0, 0, 0, 0.1),
-      0 1px 3px rgba(0, 0, 0, 0.08),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  min-width: 200px;
+  margin: 2rem auto;
+  display: block;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 .btn-primary:hover {
-  background: rgba(255, 137, 237, 0.9);
+  background: rgba(255, 137, 237, 0.6);
   transform: translateY(-2px);
-  box-shadow: 
-      0 6px 8px rgba(0, 0, 0, 0.15),
-      0 2px 4px rgba(0, 0, 0, 0.12),
-      inset 0 2px 2px rgba(255, 255, 255, 0.2);
-  color: #fff;
   border-color: white;
+  box-shadow: 
+      0 6px 24px rgba(0, 0, 0, 0.25),
+      0 2px 8px rgba(0, 0, 0, 0.15),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(1px);
+  background: rgba(255, 137, 237, 0.9);
   box-shadow: 
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      0 1px 2px rgba(0, 0, 0, 0.08),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      0 1px 3px rgba(0, 0, 0, 0.1),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
 }
 
 * {
